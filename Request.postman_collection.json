@@ -1,0 +1,536 @@
+{
+	"info": {
+		"_postman_id": "ebbf8feb-031e-41d5-acea-80cdb83d001e",
+		"name": "Request",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "addPerformer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "707ae6aa-bee6-4d67-bf8a-f5fd60e44751",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Response has correct phone\"] = responseBody.has(54434423);",
+							"",
+							"tests[\"Response has correct performer name Madonna\"] = responseBody.has(\"Madonna\");",
+							"",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\": \"salajane\",\n\t\"requestCode\": 44,\n\t\"name\" : \"Madonna\",\n\t\"email\": \"mam@gmail.com\",\n\t\"phone\" : 54434423\n}"
+				},
+				"url": {
+					"raw": "http://msi:8080/ConsertWebApplicationViimane/webresources/performers/?token=salajane",
+					"protocol": "http",
+					"host": [
+						"msi"
+					],
+					"port": "8080",
+					"path": [
+						"ConsertWebApplicationViimane",
+						"webresources",
+						"performers",
+						""
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "salajane"
+						}
+					]
+				},
+				"description": "Esinejate lisamine"
+			},
+			"response": [
+				{
+					"id": "accd09f3-9c11-4915-9721-2e49a83c0c1e",
+					"name": "addPerformer",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://msi:8080/ConsertWebApplicationViimane/webresources/performers/?token=salajane",
+							"protocol": "http",
+							"host": [
+								"msi"
+							],
+							"port": "8080",
+							"path": [
+								"ConsertWebApplicationViimane",
+								"webresources",
+								"performers",
+								""
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "salajane"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "98",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 05 May 2018 10:27:18 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "GlassFish Server Open Source Edition  4.1.1 ",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Servlet/3.1 JSP/2.3 (GlassFish Server Open Source Edition  4.1.1  Java/Oracle Corporation/1.8)",
+							"name": "X-Powered-By",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"body": "{\"performer\":[{\"performerId\":1,\"name\":\"Tupac Zhakur\",\"phone\":54433111,\"email\":\"tupac@gmail.com\"}]}"
+				}
+			]
+		},
+		{
+			"name": "getPerformerList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "87e7a10a-b90f-4063-a9e0-04a6be4a13df",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Performer name is Madonna\"] = responseBody.has(\"Madonna\");",
+							"",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://msi:8080/ConsertWebApplicationViimane/webresources/performers/?token=salajane",
+					"protocol": "http",
+					"host": [
+						"msi"
+					],
+					"port": "8080",
+					"path": [
+						"ConsertWebApplicationViimane",
+						"webresources",
+						"performers",
+						""
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "salajane"
+						}
+					]
+				},
+				"description": "getPerformerList"
+			},
+			"response": []
+		},
+		{
+			"name": "addConcert",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "81932c55-21ac-4252-a699-59efe8c683e6",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Concert price match\"] = responseBody.has(50);",
+							"",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"concertName\": \"SUVEKUUD\",\n\"concertDate\" : \"2018-04-09\",\n\"concertDuration\": 2,\n\"price\" :50,\n\"place\": \"Tallinn\",\n\"category\": \"Pop\"\n}"
+				},
+				"url": {
+					"raw": "http://msi:8080/ConsertWebApplicationViimane/webresources/concerts/?token=salajane&requestCode=56",
+					"protocol": "http",
+					"host": [
+						"msi"
+					],
+					"port": "8080",
+					"path": [
+						"ConsertWebApplicationViimane",
+						"webresources",
+						"concerts",
+						""
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "salajane"
+						},
+						{
+							"key": "requestCode",
+							"value": "56"
+						}
+					]
+				},
+				"description": "addConcert"
+			},
+			"response": []
+		},
+		{
+			"name": "getPerformer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6a1fc1f0-57ed-43f9-b298-f5c654426b7e",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Response has correct performerId\"] = responseBody.has(1);",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://msi:8080/ConsertWebApplicationViimane/webresources/performers/1/?token=salajane",
+					"protocol": "http",
+					"host": [
+						"msi"
+					],
+					"port": "8080",
+					"path": [
+						"ConsertWebApplicationViimane",
+						"webresources",
+						"performers",
+						"1",
+						""
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "salajane"
+						}
+					]
+				},
+				"description": "getPerformer"
+			},
+			"response": []
+		},
+		{
+			"name": "getConcert",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "183b4f7c-6c87-4aa6-aa4e-a7a28d2c86f5",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function()",
+							"{",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"tests[\"Response has correct category\"] = responseBody.has(\"Pop\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://msi:8080/ConsertWebApplicationViimane/webresources/concerts/1/?token=salajane ",
+					"protocol": "http",
+					"host": [
+						"msi"
+					],
+					"port": "8080",
+					"path": [
+						"ConsertWebApplicationViimane",
+						"webresources",
+						"concerts",
+						"1",
+						""
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "salajane "
+						}
+					]
+				},
+				"description": "getConcert"
+			},
+			"response": []
+		},
+		{
+			"name": "getConcertList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "429176bd-8aec-45f8-98e5-6253f24ed501",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://msi:8080/ConsertWebApplicationViimane/webresources/concerts/?token=salajane&price=50&catecory=Pop&place=Tallinn",
+					"protocol": "http",
+					"host": [
+						"msi"
+					],
+					"port": "8080",
+					"path": [
+						"ConsertWebApplicationViimane",
+						"webresources",
+						"concerts",
+						""
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "salajane"
+						},
+						{
+							"key": "price",
+							"value": "50"
+						},
+						{
+							"key": "catecory",
+							"value": "Pop"
+						},
+						{
+							"key": "place",
+							"value": "Tallinn"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getConcertPerformerList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cb48b3b3-cbb7-44c6-84c5-5b92e01447ca",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Has correct concert name\"] = responseBody.has(\"Madonna\");",
+							"",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+							"});",
+							"",
+							"pm.test(\"Status code name has string\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://msi:8080/ConsertWebApplicationViimane/webresources/concerts/1/performers/?token=salajane",
+					"protocol": "http",
+					"host": [
+						"msi"
+					],
+					"port": "8080",
+					"path": [
+						"ConsertWebApplicationViimane",
+						"webresources",
+						"concerts",
+						"1",
+						"performers",
+						""
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "salajane"
+						}
+					]
+				},
+				"description": "getConcertPerformerList"
+			},
+			"response": []
+		},
+		{
+			"name": "addConcertPerformer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed900983-c8eb-4178-a141-09b9a3d47b2a",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"performerHourPrice\"]  = responseBody.has(120);",
+							"",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestCode\": 123,\n  \"concertId\" : 1,\n  \"performerHourPrice\": 120,\n  \"performerId\": 2,\n  \"concertDuration\": 1.2\n}"
+				},
+				"url": {
+					"raw": "http://msi:8080/ConsertWebApplicationViimane/webresources/concerts/1/performers/?token=salajane ",
+					"protocol": "http",
+					"host": [
+						"msi"
+					],
+					"port": "8080",
+					"path": [
+						"ConsertWebApplicationViimane",
+						"webresources",
+						"concerts",
+						"1",
+						"performers",
+						""
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "salajane "
+						}
+					]
+				},
+				"description": "addConcertPerformer"
+			},
+			"response": []
+		}
+	]
+}
