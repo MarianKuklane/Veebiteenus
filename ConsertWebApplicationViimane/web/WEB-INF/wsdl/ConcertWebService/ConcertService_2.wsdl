@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
+	xmlns:tns="http://www.ttu.ee/idu0075/2015/ws/concert" 
+	targetNamespace="http://www.ttu.ee/idu0075/2015/ws/concert">
+	<wsdl:types>
+		<xs:schema  targetNamespace="http://www.ttu.ee/idu0075/2015/ws/concert" elementFormDefault="qualified">
+						
+			<xs:element name="getConcertRequest">
+				<xs:complexType>
+						<xs:sequence>
+							<xs:element name="token" type="xs:string"/>
+							<xs:element name="concertId" type="xs:integer"/>
+						</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			<xs:element name="getConcertResponse" type="tns:concertType"/>
+			
+			<xs:complexType name="concertType">
+				<xs:sequence>
+					<xs:element name="concertId" type="xs:integer"/>
+					<xs:element name="concertName" type="xs:string"/>
+					<xs:element name="concertDate" type="xs:date"/>
+					<xs:element name="price" type="xs:double"/>
+					<xs:element name="place" type="xs:string"/>
+					<xs:element name="concertDuration" type="xs:double"/>
+					<xs:element name="category" minOccurs="1">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:pattern value="Rock|Pop|Trance|Classic"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="concertPerformerList" type="tns:concertPerformerListType"/>
+				</xs:sequence>
+			</xs:complexType>
+			
+			
+			<xs:element name="addConcertRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="concertName" type="xs:string"/>
+						<xs:element name="concertDate" type="xs:date"/>
+						<xs:element name="concertDuration" type="xs:double"/>
+						<xs:element name="requestCode" type="xs:integer"/>
+						<xs:element name="price" type="xs:double"/>
+						<xs:element name="place" type="xs:string"/>
+						<xs:element name="catecory" minOccurs="1">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value="Rock|Pop|Trance|Classic"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			
+			<xs:element name="addConcertResponse" type="tns:concertType"/>
+			
+			
+			<xs:element name="getConcertListRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="place" type="xs:string"/>
+						<xs:element name="price" type="xs:double"/>
+						<xs:element name="catecory" minOccurs="1">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:pattern value="Rock|Pop|Trance|Classic"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			<xs:element name="getConcertListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" maxOccurs="unbounded" name="concert" type="tns:concertType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			<xs:element name="getPerformerRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element  name="token" type="xs:string"/>
+						<xs:element  name="Id" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			<xs:element name="getPerformerResponse" type="tns:performerType"/>
+			
+			<xs:complexType name="performerType">
+				<xs:sequence>
+					<xs:element name="performerId" type="xs:integer"/>
+					<xs:element name="name" type="xs:string"/>
+					<xs:element name="phone" type="xs:integer"/>
+					<xs:element name="email" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			
+			
+			<xs:element name="addPerformerRequest">
+				<xs:complexType>
+					<xs:sequence>
+							<xs:element name="token" type="xs:string"/>
+							<xs:element name="requestCode" type="xs:integer"/>
+							<xs:element name="name" type="xs:string"/>
+							<xs:element minOccurs="0" maxOccurs="1" name="email" type="xs:string"/>
+							<xs:element name="phone" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+
+			
+			<xs:element name="addPerformerResponse" type="tns:performerType"/>
+			
+			
+			<xs:element name="getPerformerListRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			<xs:element name="getPerformerListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" maxOccurs="unbounded" name="performer" type="tns:performerType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			<xs:element name="getConcertPerformerListRequest">
+			<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="concertId" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			<xs:element name="getConcertPerformerListResponse" type="tns:concertPerformerListType"/>
+			
+			<xs:complexType name ="concertPerformerListType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="concertPerformer" type="tns:concertPerformerType"/>
+				</xs:sequence>
+			</xs:complexType>
+			
+			<xs:complexType name ="concertPerformerType">
+				<xs:sequence>
+					<xs:element name="performer" type="tns:performerType"/>
+					<xs:element name="performerHourPrice" type="xs:double"/>
+					<xs:element name="concertDuration" type="xs:double"/>
+				</xs:sequence>
+			</xs:complexType>
+			
+			<xs:element name="addConcertPerformerRequest">
+				<xs:complexType>
+					<xs:sequence>
+							<xs:element name="requestCode" type="xs:integer"/>
+							<xs:element name="token" type="xs:string"/>
+							<xs:element name="concertId" type="xs:integer"/>
+							<xs:element name="performerId" type="xs:integer"/>
+							<xs:element name="performerHourPrice" type="xs:double"/>
+							<xs:element name="concertDuration" type="xs:double"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+			<xs:element name="addConcertPerformerResponse" type="tns:concertPerformerType"/>
+											
+		</xs:schema>
+	</wsdl:types>
+	
+	<wsdl:message name="getConcertMessageRequest">
+		<wsdl:part name="parameter" element="tns:getConcertRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getConcertMessageResponse">
+		<wsdl:part name="parameter" element="tns:getConcertResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addConcertMessageRequest">
+		<wsdl:part name="parameter" element="tns:addConcertRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addConcertMessageResponse">
+		<wsdl:part name="parameter" element="tns:addConcertResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getConcertListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getConcertListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getConcertListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getConcertListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getPerformerMessageRequest">
+		<wsdl:part name="parameter" element="tns:getPerformerRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getPerformerMessageResponse">
+		<wsdl:part name="parameter" element="tns:getPerformerResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addPerformerMessageRequest">
+		<wsdl:part name="parameter" element="tns:addPerformerRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addPerformerMessageResponse">
+		<wsdl:part name="parameter" element="tns:addPerformerResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getPerformerListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getPerformerListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getPerformerListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getPerformerListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getConcertPerformerListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getConcertPerformerListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getConcertPerformerListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getConcertPerformerListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addConcertPerformerMessageRequest">
+		<wsdl:part name="parameter" element="tns:addConcertPerformerRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addConcertPerformerMessageResponse">
+		<wsdl:part name="parameter" element="tns:addConcertPerformerResponse"/>
+	</wsdl:message>
+	
+	<wsdl:portType name="ConcertPortType">
+		<wsdl:operation name="getConcert">
+			<wsdl:input message="tns:getConcertMessageRequest"/>
+			<wsdl:output message="tns:getConcertMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addConcert">
+			<wsdl:input message="tns:addConcertMessageRequest"/>
+			<wsdl:output message="tns:addConcertMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getConcertList">
+			<wsdl:input message="tns:getConcertListMessageRequest"/>
+			<wsdl:output message="tns:getConcertListMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getPerformer">
+			<wsdl:input message="tns:getPerformerMessageRequest"/>
+			<wsdl:output message="tns:getPerformerMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addPerformer">
+			<wsdl:input message="tns:addPerformerMessageRequest"/>
+			<wsdl:output message="tns:addPerformerMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getPerformerList">
+			<wsdl:input message="tns:getPerformerListMessageRequest"/>
+			<wsdl:output message="tns:getPerformerListMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getConcertPerformerList">
+			<wsdl:input message="tns:getConcertPerformerListMessageRequest"/>
+			<wsdl:output message="tns:getConcertPerformerListMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addConcertPerformer">
+			<wsdl:input message="tns:addConcertPerformerMessageRequest"/>
+			<wsdl:output message="tns:addConcertPerformerMessageResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	<wsdl:binding name="ConcertBinding" type="tns:ConcertPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getConcert">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="addConcert">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getConcertList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>	
+		
+		<wsdl:operation name="getPerformer">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="addPerformer">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="getPerformerList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>	
+		
+		<wsdl:operation name="getConcertPerformerList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		
+		<wsdl:operation name="addConcertPerformer">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	
+	<wsdl:service name="ConcertService">
+		<wsdl:port name="ConcertPort" binding="tns:ConcertBinding">
+			<soap:address location="Empty"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/C:/Users/marti/Desktop/Projekt/Veebiteenuse_projekt_03_03/Veebiteenuse_projekt_02_03_hilisem/ConcertService_2.wsdl" uri="src/conf/xml-resources/web-services/ConcertWebService/wsdl/ConcertService_2.wsdl"/>
+</catalog>
